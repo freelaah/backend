@@ -22,6 +22,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/rotaTeste', rotaTesteRouter);
 
+//localhost:5000/users/
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
