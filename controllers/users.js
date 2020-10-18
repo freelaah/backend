@@ -7,4 +7,9 @@ function listAllUsers(req, res, next){
     res.status(200).send(req.body);
 }
 
-module.exports = {insertUser, listAllUsers}
+
+function loginUser(req, res, next){
+    res.status(200).send(req.body);
+}
+
+module.exports = {insertUser, listAllUsers, loginUser}

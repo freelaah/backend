@@ -23,4 +23,26 @@ async function listAllUsers(req, res, next) {
 }
 
 
-module.exports = {insertUser, listAllUsers};
+async function loginUser(req, res, next) {
+   
+   const login = req.body.login;
+   const password = req.body.password;
+
+    let user = await userModel.find({login: login});
+    let playload = {autorization: false};
+    
+    try{
+        if(user[0].senha === password){
+            playload.autorization = true;
+        }
+    }catch(e){
+        console.log("erro")
+    }
+    
+    req.body = playload;
+    console.log(req.body);
+    next();     
+}
+
+
+module.exports = {insertUser, listAllUsers, loginUser};

@@ -15,6 +15,11 @@ router.get('/',
   
 )
 
+router.post('/login',
+  userMiddleware.loginUser,
+  userController.loginUser
+)
+
 router.post('/register',
   userMiddleware.insertUser,
   userController.insertUser
