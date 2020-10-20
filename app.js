@@ -8,6 +8,8 @@ const cors = require('cors'); //importando os comportamentos de cross origin
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const serviceRouter = require('./routes/services');
+
 const rotaTesteRouter = require('./routes/rotaTeste');
 
 var app = express(); //biblioteca do express

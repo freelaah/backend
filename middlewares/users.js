@@ -29,17 +29,17 @@ async function loginUser(req, res, next) {
    const password = req.body.password;
 
     let user = await userModel.find({login: login});
-    let playload = {autorization: false};
+    let body = {autorization: false};
     
     try{
         if(user[0].senha === password){
-            playload.autorization = true;
+            body.autorization = true;
         }
     }catch(e){
         console.log("erro")
     }
     
-    req.body = playload;
+    req.body = body;
     console.log(req.body);
     next();     
 }
