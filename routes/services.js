@@ -1,3 +1,26 @@
+const multer = require('multer');
+var express = require('express');
+var router = express.Router();
+
+const servicesMiddleware = require('../middlewares/services');
+const servicesController = require('../controllers/services');
+
+
+var storage = multer.diskStorage({
+
+    destination: function (req, file, cb) {
+      console.log('>>> gravou no diretório')
+      cb(null, './storage/')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname) //Appending .jpg
+    }
+  
+  });
+  
+
+const upload = multer({ storage: storage});
+
 // import multer from 'multer'; 
 // import path from 'path'; 
 // export default { 
@@ -9,16 +32,24 @@
 //             cb(null, `${name}-${Date.now()}${ext}`); 
 //         }, }), }; 
 
-const multer = require('multer');
-var express = require('express');
-var router = express.Router(0);
+router.post('/',
+  upload.single('image'),
+  servicesMiddleware.insertService,
+  servicesController.insertService
+);
 
-//const servicesMid = require('')
 
-var storage = multer.diskStorage({
+router.get('/',
+    servicesMiddleware.getAllServices,
+    servicesController.listAllServices
+)
 
-    destination: function(req, file, ch){
-        cb(null, '')
-    },
-    //filename: function()
-})
+
+router.get('/:serviceID',
+    servicesMiddleware.getService
+)
+
+
+
+
+module.exports = router;

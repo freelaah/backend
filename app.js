@@ -6,8 +6,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors'); //importando os comportamentos de cross origin
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
 const serviceRouter = require('./routes/services');
 
 const rotaTesteRouter = require('./routes/rotaTeste');
@@ -22,7 +22,8 @@ app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/rotaTeste', rotaTesteRouter);
+app.use('/services', serviceRouter);
+//app.use('/rotaTeste', serviceRouter);
 
 //localhost:5000/users/
 

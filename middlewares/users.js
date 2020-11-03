@@ -1,8 +1,5 @@
-//var jwt = require('jsonwebtoken'); 
-const jwt = require("jsonwebtoken");
-
 //Lógica
-
+const jwt = require("jsonwebtoken");
 const userModel = require( "../models/users");
 
 async function insertUser(req, res, next){
