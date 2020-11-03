@@ -1,3 +1,6 @@
+//var jwt = require('jsonwebtoken'); 
+const jwt = require("jsonwebtoken");
+
 //Lógica
 
 const userModel = require( "../models/users");
@@ -22,27 +25,30 @@ async function listAllUsers(req, res, next) {
     next();
 }
 
-
-async function loginUser(req, res, next) {
-   
-   const login = req.body.login;
-   const password = req.body.password;
-
-    let user = await userModel.find({login: login});
-    let body = {autorization: false};
+async function checkLogin(req, res, next){
+    
+    let {login, password} = req.body; 
+    let resultadoBanco = await userModel.findOne({"login": login, "senha":password});
+    
+   if(resultadoBanco){
     
     try{
-        if(user[0].senha === password){
-            body.autorization = true;
-        }
+        
+        var token = jwt.sign({"type":resultadoBanco.tipo, "cpf": resultadoBanco.cpf, exp: Math.floor(Date.now() / 1000) + (60 * 1)}, 'palavrasupersecreta');         
+        res.locals.data = {token:token, type:resultadoBanco.tipo, authorization:true};
+
+        console.log(">>> token", token)
+        
     }catch(e){
-        console.log("erro")
+        console.log("erro", e);
     }
-    
-    req.body = body;
-    console.log(req.body);
-    next();     
+
+    return next();
+
+   }else {
+       res.locals.data = {authorization:false};
+       return next();
+   }   
 }
 
-
-module.exports = {insertUser, listAllUsers, loginUser};
+module.exports = {insertUser, listAllUsers, checkLogin};
