@@ -1,10 +1,13 @@
 const { default: AdminBro } = require('admin-bro');
-const AdminBroMongoose = require('@admin-bro/mongoose')
+const AdminBroMongoose = require('@admin-bro/mongoose');
+const { after: passwordAfterHook, before: passwordBeforeHook } = require('./actions/password.hook')
 
 AdminBro.registerAdapter(AdminBroMongoose);
 
 const users = require('./models/users');
+// const usersAdmin = require('./models/users.admin');
 const services = require('./models/services');
+// const { UsersAdmin } = require('./models/users.admin')
 
 /**@type {import('admin-bro').AdminBroOptions} */
 
@@ -17,14 +20,37 @@ const options = {
     resources: [
         {
             resource: users, options: {
-                navigation: AdmintrationsResource
+                navigation: AdmintrationsResource,
+                properties: {
+                    encriptedPassword: {
+                        isVisible: false,
+                    },
+                    password: {
+                        type: 'password',
+                    },
+                },
+                actions: {
+                    new: {
+                        after: passwordAfterHook,
+                        before: passwordBeforeHook,
+
+                    },
+                    edit: {
+                        after: passwordAfterHook,
+                        before: passwordBeforeHook,
+
+                    }
+                }
             }
+
         },
         {
             resource: services, options: {
                 navigation: AdmintrationsResource
             }
         },
+
+
     ],
     branding: {
         companyName: 'Freelaah',
