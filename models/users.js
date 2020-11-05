@@ -3,7 +3,7 @@ const Schema = mongoose.Schema; //A biblioteca mongosse tem o schema para permit
 //_id //Number // [] array
 const userModel = new Schema(
     {
-        email: {
+        login: {
             type: String,
             required: true
         },

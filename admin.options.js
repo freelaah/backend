@@ -21,26 +21,6 @@ const options = {
         {
             resource: users, options: {
                 navigation: AdmintrationsResource,
-                properties: {
-                    encriptedPassword: {
-                        isVisible: false,
-                    },
-                    password: {
-                        type: 'password',
-                    },
-                },
-                actions: {
-                    new: {
-                        after: passwordAfterHook,
-                        before: passwordBeforeHook,
-
-                    },
-                    edit: {
-                        after: passwordAfterHook,
-                        before: passwordBeforeHook,
-
-                    }
-                }
             }
 
         },
