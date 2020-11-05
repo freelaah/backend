@@ -4,7 +4,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const cors = require('cors'); //importando os comportamentos de cross origin
+const cors = require('cors');
+const { default: AdminBro } = require('admin-bro');
+const options = require('./admin.options');
+const buildAdminRouter = require('./admin.router');
+
+//importando os comportamentos de cross origin
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -20,20 +25,26 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors());
 
+
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/services', serviceRouter);
 //app.use('/rotaTeste', serviceRouter);
 
+const admin = new AdminBro(options);
+const router = buildAdminRouter(admin);
+app.use(admin.options.rootPath, router);
+
 //localhost:5000/users/
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

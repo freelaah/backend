@@ -9,6 +9,8 @@ var debug = require('debug')('backend:server');
 var http = require('http');
 const mongodb = require("../database/mongodb");
 
+
+
 /**
  * Get port from environment and store in Express.
  */
@@ -83,14 +85,15 @@ function onError(error) {
  */
 
 //Essa função indica que o servidor está ativo
- function onListening() {
+function onListening() {
   var addr = server.address();
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 
-  mongodb.mongoose; //chama a conexão com o banco
+  mongodb.mongoose;
+  //chama a conexão com o banco
   console.log("Conexão com o banco já está iniciada");
   console.log("Servidor iniciado na porta", port);
 }
