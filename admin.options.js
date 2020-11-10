@@ -7,6 +7,10 @@ AdminBro.registerAdapter(AdminBroMongoose);
 const users = require('./models/users');
 // const usersAdmin = require('./models/users.admin');
 const services = require('./models/services');
+
+const categories = require('./models/categories');
+
+const schedules = require('./models/schedules');
 // const { UsersAdmin } = require('./models/users.admin')
 
 /**@type {import('admin-bro').AdminBroOptions} */
@@ -26,6 +30,16 @@ const options = {
         },
         {
             resource: services, options: {
+                navigation: AdmintrationsResource
+            }
+        },
+        {
+            resource: categories, options: {
+                navigation: AdmintrationsResource
+            }
+        },
+        {
+            resource: schedules, options: {
                 navigation: AdmintrationsResource
             }
         },
