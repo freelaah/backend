@@ -1,12 +1,12 @@
-const mongoose = require('mongoose'); 
+const mongoose = require('mongoose');
 
 //host:porta:banco 
-const connectionURL = 'mongodb://localhost:27017/UNA' 
+const connectionURL = 'mongodb://172.17.0.2:27017/Una2'
 
-mongoose.connect(connectionURL, { 
-    useNewUrlParser: true, 
-    useUnifiedTopology: true, 
-    useFindAndModify: false 
-}); 
+mongoose.connect(connectionURL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+});
 
-module.exports ={mongoose} 
+module.exports = { mongoose } 
