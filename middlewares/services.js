@@ -25,7 +25,7 @@ async function getService(req, res, next) {
     console.log(teste); 
     fs.readFile(teste.imgURL, {encoding: 'base64'}, (err, data) => { 
         console.log(data); 
-        res.status(200).send({"file":data})
+        res.status(200).send({"file":data, "imgURL":teste.imgURL})
      }) 
 }
 
@@ -39,7 +39,8 @@ async function getAllServices(req, res, next) {
 
 async function insertService(req, res, next){
     
-    let data = {...req.body, "imgURL":req.file.path}
+    //let data = {...req.body, "imgURL":req.file.path}
+    let data = {...req.body}
 
     //TODO tratar caso nao venha a descricao
 

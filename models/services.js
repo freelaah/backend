@@ -2,31 +2,43 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const servicesModel = new Schema(
-    {
-        descricao: {
+    {       
+        id_user:{
             type: String,
             required: true
         },
-        categoria: {
+        id_categoria:{
             type: String,
             required: true
         },
-        subcategorias: [{
-            descricao: {
-                type: String,
-                required: true
-            },
-            imgURL: {
-                type: String,
-                required: true
-            }
-        }],
-        imgURL: {
+        descricao:{
             type: String,
+            require: true
+        },
+        preco:{
+            type: Number,
+            get: getPrice,
+            set: setPrice,
+            require: true,
+        },
+        imagem:{
+            type: String,
+            require: true
+        },
+        ativo:{
+            type: Boolean,
             required: true
         }
     },
     { _id: true, collection: 'services'}
 );
+
+function getPrice(num){
+    return (num/100).toFixed(2);
+}
+
+function setPrice(num){
+    return (num * 100);
+}
 
 module.exports = mongoose.model('services', servicesModel);

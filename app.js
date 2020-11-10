@@ -6,13 +6,20 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors'); //importando os comportamentos de cross origin
 
+
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const serviceRouter = require('./routes/services');
+const categoriesRouter = require('./routes/categories');
+const schedulesRouter = require('./routes/schedules');
 
 const rotaTesteRouter = require('./routes/rotaTeste');
 
 var app = express(); //biblioteca do express
+// var dir = path.join(__dirname, 'public');
+// app.use(express.static(dir))
+
+app.use( '/files', express.static(path.resolve(__dirname, '.', 'storage')) ); 
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -23,6 +30,8 @@ app.use(cors());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/services', serviceRouter);
+app.use('/categories', categoriesRouter);
+app.use('/schedules', schedulesRouter);
 //app.use('/rotaTeste', serviceRouter);
 
 //localhost:5000/users/
