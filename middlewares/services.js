@@ -21,12 +21,15 @@ const serviceModel = require('../models/services');
 // }
 async function getService(req, res, next) {
     console.log(req.params.serviceID); 
-    const teste = await serviceModel.findById(req.params.serviceID)
-    console.log(teste); 
-    fs.readFile(teste.imgURL, {encoding: 'base64'}, (err, data) => { 
-        console.log(data); 
-        res.status(200).send({"file":data, "imgURL":teste.imgURL})
-     }) 
+    const service = await serviceModel.findById(req.params.serviceID)
+    console.log(service); 
+    // fs.readFile(teste.imgURL, {encoding: 'base64'}, (err, data) => { 
+    //     console.log(data); 
+    //     res.status(200).send({"file":data, "imgURL":teste.imgURL})
+    //  }) 
+    
+    req.body = service;
+    next();
 }
 
 async function getAllServices(req, res, next) {
@@ -40,8 +43,8 @@ async function getAllServices(req, res, next) {
 async function insertService(req, res, next){
     
     //let data = {...req.body, "imgURL":req.file.path}
-    let data = {...req.body}
-
+    console.log(">>>>", req.file.path)
+    let data = {...req.body, "imgURL":req.file.originalname}
     //TODO tratar caso nao venha a descricao
 
     let insercaoBanco = await serviceModel.create(data);

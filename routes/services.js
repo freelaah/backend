@@ -46,10 +46,8 @@ router.get('/',
 
 
 router.get('/:serviceID',
-    servicesMiddleware.getService
+    servicesMiddleware.getService,
+    servicesController.getService
 )
-
-
-
 
 module.exports = router;

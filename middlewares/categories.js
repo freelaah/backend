@@ -19,7 +19,17 @@ async function listAllCategories(req, res, next) {
     next();
 }
 
-module.exports = {insertCategory, listAllCategories}
+// }
+async function getCategory(req, res, next) {
+    console.log(req.params.categoryID); 
+    const category = await categoryModel.findById(req.params.categoryID)
+    console.log(category); 
+    
+    req.body = category;
+    next();
+}
+
+module.exports = {insertCategory, listAllCategories, getCategory}
 
 
 

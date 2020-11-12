@@ -7,4 +7,10 @@ function listAllServices(req, res, next){
     res.status(200).send(req.body);
 }
 
-module.exports = { insertService, listAllServices }
+
+function getService(req, res, next){
+    res.status(200).send(req.body);
+}
+
+
+module.exports = { insertService, listAllServices, getService }

@@ -45,8 +45,6 @@ const admin = new AdminBro(options);
 const router = buildAdminRouter(admin);
 app.use(admin.options.rootPath, router);
 
-//localhost:5000/users/
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

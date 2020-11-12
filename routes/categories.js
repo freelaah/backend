@@ -1,17 +1,22 @@
 var express = require('express');
 var router = express.Router();
 
-const rotaCategoryMiddleware = require('../middlewares/categories');
-const rotaCategoryController = require('../controllers/categories');
+const categoryMiddleware = require('../middlewares/categories');
+const categoryController = require('../controllers/categories');
 
 router.post("/",
-    rotaCategoryMiddleware.insertCategory,
-    rotaCategoryController.insertCategory    
+    categoryMiddleware.insertCategory,
+    categoryController.insertCategory    
 );
 
 router.get("/", 
-    rotaCategoryMiddleware.listAllCategories,
-    rotaCategoryController.listAllCategories
+    categoryMiddleware.listAllCategories,
+    categoryController.listAllCategories
 );
+
+router.get('/:categoryID',
+    categoryMiddleware.getCategory,
+    categoryController.getCategory
+)
 
 module.exports = router;

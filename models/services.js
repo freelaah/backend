@@ -21,7 +21,7 @@ const servicesModel = new Schema(
             set: setPrice,
             require: true,
         },
-        imagem:{
+        imgURL:{
             type: String,
             require: true
         },

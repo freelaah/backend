@@ -7,4 +7,9 @@ function listAllCategories(req, res, next){
     res.status(200).send(req.body);
 }
 
-module.exports = {insertCategory, listAllCategories}
+function getCategory(req, res, next){
+    res.status(200).send(req.body);
+}
+
+
+module.exports = {insertCategory, listAllCategories, getCategory}

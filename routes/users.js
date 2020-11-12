@@ -15,6 +15,11 @@ router.get('/',
   
 )
 
+router.get('/:userID',
+    userMiddleware.getUser,
+    userController.getUser
+)
+
 router.post('/login',
   userMiddleware.checkLogin,
   userController.loginUser

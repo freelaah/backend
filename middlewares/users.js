@@ -22,6 +22,14 @@ async function listAllUsers(req, res, next) {
     next();
 }
 
+async function getUser(req, res, next) {
+    console.log(req.params.userID); 
+    const user = await userModel.findById(req.params.userID)
+    console.log(user); 
+    req.body = user;
+    next();
+}
+
 async function checkLogin(req, res, next){
     
     let {login, password} = req.body; 
@@ -32,7 +40,7 @@ async function checkLogin(req, res, next){
     try{
         
         var token = jwt.sign({"type":resultadoBanco.tipo, "cpf": resultadoBanco.cpf, exp: Math.floor(Date.now() / 1000) + (60 * 1)}, 'palavrasupersecreta');         
-        res.locals.data = {token:token, type:resultadoBanco.tipo, authorization:true};
+        res.locals.data = {token:token, type:resultadoBanco.tipo, authorization:true, id_user:resultadoBanco._id};
 
         console.log(">>> token", token)
         
@@ -48,4 +56,4 @@ async function checkLogin(req, res, next){
    }   
 }
 
-module.exports = {insertUser, listAllUsers, checkLogin};
+module.exports = {insertUser, listAllUsers, checkLogin, getUser};

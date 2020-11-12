@@ -7,7 +7,7 @@ const userModel = new Schema(
             type: String,
             required: true
         },
-        encriptedPassword: {
+        senha: {
             type: String,
             required: true
 
@@ -23,8 +23,11 @@ const userModel = new Schema(
         cpf: {
             type: String,
             required: true
+        },
+        img_profile:{
+            type: String,
+            required: false
         }
-
     },
     { _id: true, collection: 'users' } //aqui estamos nomeando collection e dizendo que o id será criado automaticamente
 );
