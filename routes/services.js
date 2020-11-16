@@ -50,4 +50,9 @@ router.get('/:serviceID',
     servicesController.getService
 )
 
+router.get('/user/:userID',
+    servicesMiddleware.getAllservicesByUser,
+    servicesController.getAllservicesByUser
+)
+
 module.exports = router;
