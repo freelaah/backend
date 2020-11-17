@@ -23,6 +23,8 @@ const rotaTesteRouter = require('./routes/rotaTeste');
 var app = express(); //biblioteca do express
 // var dir = path.join(__dirname, 'public');
 // app.use(express.static(dir))
+
+//adminBro inicia antes das rotas principais.
 const admin = new AdminBro(options);
 const router = buildAdminRouter(admin);
 app.use(admin.options.rootPath, router);
