@@ -55,4 +55,9 @@ router.get('/user/:userID',
     servicesController.getAllservicesByUser
 )
 
+router.delete('/:serviceID',
+    servicesMiddleware.deleteService,
+    servicesController.deleteService
+)
+
 module.exports = router;

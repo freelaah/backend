@@ -44,23 +44,23 @@ async function getAllServices(req, res, next) {
 
 async function insertService(req, res, next){
     
-    //let data = {...req.body, "imgURL":req.file.path}
-    console.log(">>>>", req.file.path)
-    let data = {...req.body, "imgURL":req.file.originalname}
-    //TODO tratar caso nao venha a descricao
+    const event = new Date();
+    const imgURL = (req.file === undefined) ? "sem_imagem.jpg" : req.file.originalname;
 
+    let data = {...req.body, "imgURL":imgURL}
     let insercaoBanco = await serviceModel.create(data);
+    req.body = insercaoBanco;
+
     next();
 }
 
 
 async function getAllservicesByUser(req, res, next) {
-
-    // rota /services/user/id
-    const user_id = req.params.userID;
-    const listServices = await serviceModel.find( {"id_user" : user_id});
+    // rota -> /services/user/id
+    const id_user = req.params.userID;
+    const listServices = await serviceModel.find( {"id_user" : id_user});
     const objJSON = JSON.parse(JSON.stringify(listServices));
-    const user = await userModel.findById("5fa1fa70fa669488f2176b28");
+    const user = await userModel.findById(id_user);
     
     for(const item in objJSON){
         const objCategoria = objJSON[item];
@@ -68,11 +68,22 @@ async function getAllservicesByUser(req, res, next) {
          let categoria = await categoriaModel.findById(id_categoria);
         
          const objItem = Object.assign(objCategoria);
-         Object.assign(objItem, {"categoria": categoria},{"user": user});
+         Object.assign(objItem, {"categoria": categoria},
+                                {"user": user}, 
+                      );
      }
 
     req.body = objJSON;
     next();
-
 }
-module.exports = { insertService, getService, getAllServices, getAllservicesByUser}
+
+async function deleteService(req, res, next){
+    const id_service = req.params.serviceID;
+
+    serviceModel.findByIdAndDelete(id_service, function (err) {
+        if(err) console.log(err);
+        next();
+      });    
+}
+
+module.exports = { insertService, getService, getAllServices, getAllservicesByUser, deleteService}

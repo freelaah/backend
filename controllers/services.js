@@ -17,4 +17,10 @@ function getAllservicesByUser(req, res, next){
     res.status(200).send(req.body);
 }
 
-module.exports = { insertService, listAllServices, getService, getAllservicesByUser }
+
+function deleteService(req, res, next){
+    res.status(200).send();
+}
+
+
+module.exports = { insertService, listAllServices, getService, getAllservicesByUser, deleteService }
