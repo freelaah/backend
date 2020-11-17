@@ -53,3 +53,8 @@ const options = {
 }
 
 module.exports = options;
+
+/**
+ *const router = AdminBroExpress.buildAuthenticatedRouter(adminBro, { cookiePassword: 'passwordTeste', authenticate, }, null, null); async function authenticate(email, password) { if (email === emaildobanco && password === passworddobanco) { return true; } return false; }
+ */
+

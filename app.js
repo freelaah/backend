@@ -23,8 +23,11 @@ const rotaTesteRouter = require('./routes/rotaTeste');
 var app = express(); //biblioteca do express
 // var dir = path.join(__dirname, 'public');
 // app.use(express.static(dir))
+const admin = new AdminBro(options);
+const router = buildAdminRouter(admin);
+app.use(admin.options.rootPath, router);
 
-app.use( '/files', express.static(path.resolve(__dirname, '.', 'storage')) ); 
+app.use('/files', express.static(path.resolve(__dirname, '.', 'storage')));
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -41,9 +44,6 @@ app.use('/categories', categoriesRouter);
 app.use('/schedules', schedulesRouter);
 //app.use('/rotaTeste', serviceRouter);
 
-const admin = new AdminBro(options);
-const router = buildAdminRouter(admin);
-app.use(admin.options.rootPath, router);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
