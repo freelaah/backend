@@ -6,7 +6,7 @@ const authMiddeware = require('../middlewares/utils/auth');
 const userController = require('../controllers/users');
 
 router.get('/', 
-   authMiddeware.authorization, 
+   //authMiddeware.authorization, 
    userMiddleware.listAllUsers,
    userController.listAllUsers  
 )
