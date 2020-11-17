@@ -2,17 +2,13 @@ var express = require('express');
 var router = express.Router();
 
 const userMiddleware = require('../middlewares/users');
+const authMiddeware = require('../middlewares/utils/auth');
 const userController = require('../controllers/users');
 
-/* GET users listing. */
-/*router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});*/
-
 router.get('/', 
+   authMiddeware.authorization, 
    userMiddleware.listAllUsers,
-   userController.listAllUsers
-  
+   userController.listAllUsers  
 )
 
 router.get('/:userID',

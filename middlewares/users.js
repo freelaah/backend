@@ -4,15 +4,8 @@ const userModel = require( "../models/users");
 
 async function insertUser(req, res, next){
     
-    // {} -> findOne
-    // [] -> find
-    //let insercaoBanco = userModel.finnd("nome":"André");
     let insercaoBanco = await userModel.create(req.body);
-
     //TODO Verificar se já existe esse usuário pelo CPF
-        
-    console.log(">>> Inseriu no banco");
-    console.log(insercaoBanco);
     next();
 }
 
@@ -23,7 +16,6 @@ async function listAllUsers(req, res, next) {
 }
 
 async function getUser(req, res, next) {
-    console.log(req.params.userID); 
     const user = await userModel.findById(req.params.userID)
     console.log(user); 
     req.body = user;
@@ -39,10 +31,8 @@ async function checkLogin(req, res, next){
     
     try{
         
-        var token = jwt.sign({"type":resultadoBanco.tipo, "cpf": resultadoBanco.cpf, exp: Math.floor(Date.now() / 1000) + (60 * 1)}, 'palavrasupersecreta');         
+        var token = jwt.sign({"type":resultadoBanco.tipo, "cpf": resultadoBanco.cpf, exp: Math.floor(Date.now() / 1000) + (60 * 120)}, 'palavraSuperSecreta');         
         res.locals.data = {token:token, type:resultadoBanco.tipo, authorization:true, id_user:resultadoBanco._id};
-
-        console.log(">>> token", token)
         
     }catch(e){
         console.log("erro", e);

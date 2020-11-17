@@ -3,6 +3,7 @@ var express = require('express');
 var router = express.Router();
 
 const servicesMiddleware = require('../middlewares/services');
+const authMiddeware = require('../middlewares/utils/auth');
 const servicesController = require('../controllers/services');
 
 
@@ -32,8 +33,9 @@ const upload = multer({ storage: storage});
 //             cb(null, `${name}-${Date.now()}${ext}`); 
 //         }, }), }; 
 
-router.post('/',
+router.post('/', 
   upload.single('image'),
+  authMiddeware.authorization,
   servicesMiddleware.insertService,
   servicesController.insertService
 );
@@ -56,6 +58,7 @@ router.get('/user/:userID',
 )
 
 router.delete('/:serviceID',
+    authMiddeware.authorization,
     servicesMiddleware.deleteService,
     servicesController.deleteService
 )
