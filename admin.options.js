@@ -11,7 +11,7 @@ const services = require('./models/services');
 const categories = require('./models/categories');
 
 const schedules = require('./models/schedules');
-// const { UsersAdmin } = require('./models/users.admin')
+const adminUser = require('./adminUser.admin')
 
 /**@type {import('admin-bro').AdminBroOptions} */
 
@@ -22,6 +22,7 @@ const AdmintrationsResource = {
 
 const options = {
     resources: [
+        adminUser,
         {
             resource: users, options: {
                 navigation: AdmintrationsResource,

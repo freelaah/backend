@@ -7,6 +7,10 @@ const adminUserModel = new Schema(
             type: String,
             required: true
         },
+        name: {
+            type: String,
+            required: true
+        },
         encryptedPassword: {
             type: String,
             required: true
