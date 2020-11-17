@@ -3,7 +3,7 @@ const adminUser = require('./models/adminUser');
 const { after: passwordAfterHook, before: passwordBeforeHook } = require('./actions/password.hook')
 
 const userAdministrationResource = {
-    name: 'User Administration',
+    name: 'Criação de Usuarios Administrativos',
 }
 /**
  * @type {AdminBro.ResourceOptions}
