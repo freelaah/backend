@@ -24,6 +24,10 @@ const userModel = new Schema(
             type: String,
             required: true
         },
+        telefone:{
+            type: String,
+            required: true
+        },
         img_profile:{
             type: String,
             required: false

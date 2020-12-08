@@ -37,6 +37,8 @@ async function getService(req, res, next) {
 async function getAllServices(req, res, next) {
 
     let listServices = await serviceModel.find();
+    
+
     req.body = listServices;
     next();
 }
@@ -44,9 +46,7 @@ async function getAllServices(req, res, next) {
 
 async function insertService(req, res, next){
     
-    const event = new Date();
     const imgURL = (req.file === undefined) ? "sem_imagem.jpg" : req.file.originalname;
-
     let data = {...req.body, "imgURL":imgURL}
     let insercaoBanco = await serviceModel.create(data);
     req.body = insercaoBanco;
@@ -77,6 +77,15 @@ async function getAllservicesByUser(req, res, next) {
     next();
 }
 
+async function getAllservicesByCategory(req, res, next){
+    // rota -> /services/category/id
+    const id_categoria = req.params.categoryID;
+    const listServices = await serviceModel.find( {"id_categoria" : id_categoria});
+
+    req.body = listServices;
+    next();
+}
+
 async function deleteService(req, res, next){
     const id_service = req.params.serviceID;
 
@@ -86,4 +95,4 @@ async function deleteService(req, res, next){
       });    
 }
 
-module.exports = { insertService, getService, getAllServices, getAllservicesByUser, deleteService}
+module.exports = { insertService, getService, getAllServices, getAllservicesByUser, getAllservicesByCategory, deleteService}

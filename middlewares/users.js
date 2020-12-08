@@ -4,8 +4,17 @@ const userModel = require( "../models/users");
 
 async function insertUser(req, res, next){
     
-    let insercaoBanco = await userModel.create(req.body);
-    //TODO Verificar se já existe esse usuário pelo CPF
+    
+    let data = req.body;
+
+    if(data.cpf === null || data.nome === null || data.login === null || data.senha === null || data.telefone === null){
+        console.log("Erro - dados incorretos")
+        req.body = {error : "Dados incorretos"}
+    }else{
+        //TODO Verificar se já existe esse usuário pelo CPF
+        let insercaoBanco = await userModel.create(req.body);
+    }
+
     next();
 }
 

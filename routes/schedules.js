@@ -14,4 +14,22 @@ router.get("/",
     rotaScheduleController.listAllSchedules
 );
 
+
+router.get("/client/:clientID", 
+    rotaScheduleMiddleware.getAllSchedulesByClient,
+    rotaScheduleController.getAllSchedulesByClient
+);
+
+router.get("/professional/:professionalID", 
+    rotaScheduleMiddleware.getAllSchedulesByProfessional,
+    rotaScheduleController.getAllSchedulesByProfessional
+);
+
+
+router.delete("/:scheduleID", 
+    rotaScheduleMiddleware.deleteSchedule,
+    rotaScheduleController.deleteSchedule
+);
+
+
 module.exports = router;

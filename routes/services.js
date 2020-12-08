@@ -35,7 +35,7 @@ const upload = multer({ storage: storage});
 
 router.post('/', 
   upload.single('image'),
-  authMiddeware.authorization,
+  //authMiddeware.authorization,
   servicesMiddleware.insertService,
   servicesController.insertService
 );
@@ -55,6 +55,11 @@ router.get('/:serviceID',
 router.get('/user/:userID',
     servicesMiddleware.getAllservicesByUser,
     servicesController.getAllservicesByUser
+)
+
+router.get('/category/:categoryID',
+    servicesMiddleware.getAllservicesByCategory,
+    servicesController.getAllservicesByCategory
 )
 
 router.delete('/:serviceID',

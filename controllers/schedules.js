@@ -7,4 +7,17 @@ function listAllSchedules(req, res, next){
     res.status(200).send(req.body);
 }
 
-module.exports = {insertSchedule, listAllSchedules}
+function getAllSchedulesByClient(req, res, next){
+    res.status(200).send(req.body);
+}
+
+function deleteSchedule(req, res, next){
+    res.status(200).send();
+}
+
+function getAllSchedulesByProfessional(req, res, next){
+    res.status(200).send(req.body);
+}
+
+
+module.exports = {insertSchedule, listAllSchedules, getAllSchedulesByClient, getAllSchedulesByProfessional, deleteSchedule} 
